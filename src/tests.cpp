@@ -1,5 +1,5 @@
-#include "include/tests.h"
-#include "include/test_framework.h"
+#include "../include/tests.h"
+#include "../include/test_framework.h"
 #include <sstream>
 namespace tests {
 

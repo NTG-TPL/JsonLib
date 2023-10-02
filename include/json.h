@@ -17,11 +17,14 @@ public:
     using runtime_error::runtime_error;
 };
 
+
 class Node final
     : private std::variant<std::nullptr_t, Array, Dict, bool, int, double, std::string> {
 public:
     using variant::variant;
-    using Value = variant;
+	using Value = variant;
+    
+    Node(Value value) : variant(std::move(value)) {}
 
     bool IsInt() const {
         return std::holds_alternative<int>(*this);
@@ -105,6 +108,9 @@ public:
     }
 
     const Value& GetValue() const {
+        return *this;
+    }
+    Value& GetValue() {
         return *this;
     }
 };

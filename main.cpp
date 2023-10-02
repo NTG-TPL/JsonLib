@@ -1,3 +1,5 @@
+#define NDEBUG
+
 #include "include/tests.h"
 using namespace json;
 using namespace std::literals;
@@ -17,15 +19,19 @@ void Example(){
         json::Document{
             json::Builder{}
             .StartDict()
-                .Key("key1"s).Value(123)
-                .Key("key2"s).Value("value2"s)
-                .Key("key3"s).StartArray()
+                .Key("ключ 1"s).Value(123)
+                .Key("ключ 2"s).Value("значение 2"s)
+                .Key("ключ 3"s).StartArray()
                     .Value(456)
+                    .Value("значение 2")
+                    .Value(nullptr)
                     .StartDict().EndDict()
                     .StartDict()
+                        .Key("ключ 1"s).Value("значение 1")
+                        .Key("ключ 2"s).Value(nullptr)
                         .Key(""s).Value(nullptr)
                     .EndDict()
-                    .Value(""s)
+                    .Value("Надеюсь, принцип понятен"s)
                 .EndArray()
             .EndDict()
             .Build()
@@ -40,8 +46,5 @@ int main(){
 #ifndef NDEBUG
     tests::Test();
 #endif
-
    Example();
-
-   std::cout << __FUNCTION__ << " is finished" << std::endl;
 }
